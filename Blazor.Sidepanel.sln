@@ -11,28 +11,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Append.Blazor.Sidepanel.Doc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Append.Blazor.Sidepanel", "src\Append.Blazor.Sidepanel.csproj", "{5834E945-890B-4824-9521-8FE520D4DD8E}"
 EndProject
-
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5834E945-890B-4824-9521-8FE520D4DD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5834E945-890B-4824-9521-8FE520D4DD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5834E945-890B-4824-9521-8FE520D4DD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5834E945-890B-4824-9521-8FE520D4DD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B01081A4-2946-4F35-95E6-74741C470819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B01081A4-2946-4F35-95E6-74741C470819}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B01081A4-2946-4F35-95E6-74741C470819}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B01081A4-2946-4F35-95E6-74741C470819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5834E945-890B-4824-9521-8FE520D4DD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5834E945-890B-4824-9521-8FE520D4DD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5834E945-890B-4824-9521-8FE520D4DD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5834E945-890B-4824-9521-8FE520D4DD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5834E945-890B-4824-9521-8FE520D4DD8E} = {C5E65195-E1F5-4F49-BE62-25ED81DE18A5}
 		{B01081A4-2946-4F35-95E6-74741C470819} = {A895223B-A41C-4D55-A3FB-8919F255E914}
+		{5834E945-890B-4824-9521-8FE520D4DD8E} = {C5E65195-E1F5-4F49-BE62-25ED81DE18A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8744141E-EB7F-420B-86A0-DD0DDD7509D3}

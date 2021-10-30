@@ -8,16 +8,22 @@
 <button @onclick="OpenCreateForm">Open Create Form</button>
 <button @onclick="Close">Close</button>
 
+<Codeblock Code="@codeblock1"/>
+
 <hr />
 
 <h2>Open Fetch Data</h2>
 <button @onclick="OpenEditForm">Open Edit Form</button>
 <button @onclick="Close">Close</button>
 
+<Codeblock Code="@codeblock2"/>
+
 <hr />
 
 
 @code {
+	private string codeblock1 => "Sidepanel.Open<Create>(\"Create\", \"Starship\");";
+	private string codeblock2 => "Sidepanel.Open<Edit>(\"Create\", \"Starship\", ,(\"Starship\",new Starship()));";
 	private void OpenCreateForm()
 	{
 		Sidepanel.Open<Create>("Create", "Starship");

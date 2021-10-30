@@ -3,20 +3,26 @@
 
 <h1>Sidepanel Basic</h1>
 
-<h2>Open Counter</h2>
+<h2>Opetoper</h2>
 <button @onclick="OpenCounter">Open Counter</button>
 <button @onclick="Close">Close</button>
+
+<Codeblock Code="@codeblock1"/>
 
 <hr />
 
 <h2>Open Fetch Data</h2>
+
 <button @onclick="OpenFetchData">Open Fetch Data</button>
 <button @onclick="Close">Close</button>
+<Codeblock Code="@codeblock2"/>
 
 <hr />
 
 
 @code {
+	private string codeblock1 => "Sidepanel.Open<Counter>(\"Counter\", \"example\");\nSidepanel.Close();";
+	private string codeblock2 => "Sidepanel.Open<FetchData>(\"FetchData\");\nSidepanel.Close();";
 	private void OpenCounter()
 	{
 		Sidepanel.Open<Counter>("Counter", "example");
