@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Append.Blazor.Sidepanel\Append.Blazor.Sidepanel.csproj" />
+    <ProjectReference Include="..\src\Append.Blazor.Sidepanel.csproj" />
   </ItemGroup>
 
 </Project>
