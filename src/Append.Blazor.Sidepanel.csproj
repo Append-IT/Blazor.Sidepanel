@@ -2,13 +2,16 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
+		<Title>Blazor Sidepanel</Title>
 		<Authors>Benjamin Vertonghen</Authors>
 		<Company>Append</Company>
-		<Description>Show a sidepanel using Blazor</Description>
-		<PackageProjectUrl>https://github.com/Append-IT/Append.Blazor.Sidepanel</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/Append-IT/Append.Blazor.Sidepanel</RepositoryUrl>
+		<Description>A powerful and customizable Sidepanel implementation for Blazor applications.</Description>
+		<PackageProjectUrl>https://blazor-sidepanel.append.be/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Append-IT/Blazor.Sidepanel</RepositoryUrl>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageTags>Blazor;Razor;Components;Sidepanel;Dialog;ASP.NET;CSharp;Web</PackageTags>
+		<RepositoryType>GIT</RepositoryType>
 	</PropertyGroup>
 
 	<PropertyGroup>
