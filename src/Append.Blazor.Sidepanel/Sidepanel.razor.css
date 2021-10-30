@@ -1,0 +1,78 @@
+﻿aside {
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: #fff;
+    height: 100%;
+    width: 0;
+    z-index: 110;
+    transition: 0.3s;
+    box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.20)
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(17,24,39);
+    margin-bottom: 1rem;
+}
+
+h1{
+    font-size:1.5rem;
+}
+
+small {
+    font-size: 1rem;
+    color: #74788d;
+}
+
+.aside-inner {
+    padding: 2rem;
+    overflow-y: scroll;
+    height: 100%;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+
+    .aside-inner::-webkit-scrollbar {
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        display: none;
+    }
+
+button {
+    color: rgba(156,163,175);
+    outline: none;
+    background-color:#fff;
+    border: none;
+}
+
+    button:focus {
+        outline: none;
+    }
+
+    button:hover {
+        color: rgba(107,114,128);
+
+    }
+
+svg {
+    display: block;
+    vertical-align: middle;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+aside.is-open {
+    width: 100%;
+}
+
+aside:focus {
+    outline: none;
+}
+
+@media (min-width: 991.98px) {
+    aside.is-open {
+        width: 425px;
+    }
+}

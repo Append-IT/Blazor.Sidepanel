@@ -1,0 +1,17 @@
+﻿<aside id="sidepanel" class="@IsOpenCssClass" @onkeydown="OnKeyDown" tabindex="@(Service.IsOpen ? "0" : "-1")" @ref="_element">
+	<div class="aside-inner">
+		<div class="sticky-topbar side-panel-topbar">
+			<header>
+				<h1>
+					@Service.Title&nbsp;<small>@Service.Subtitle</small>
+				</h1>
+				<button type="button" @onclick="Service.Close">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</header>
+		</div>
+		@BuildInnerComponent()
+	</div>
+</aside>

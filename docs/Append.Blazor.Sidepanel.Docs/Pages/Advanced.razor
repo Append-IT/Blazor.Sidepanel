@@ -1,0 +1,50 @@
+﻿@page "/advanced"
+@inject ISidepanelService Sidepanel
+
+<h1>Sidepanel Advanced</h1>
+
+<h2>Open Counter with parameter</h2>
+<button @onclick="OpenCounterWithParameter">Open Counter</button>
+<button @onclick="Close">Close</button>
+
+<hr />
+
+<h2>Open Counter with multiple parameters</h2>
+  <div class="form-group">
+    <label for="@nameof(increaseBy)">Increase By</label>
+    <input type="number" class="form-control" id="@nameof(increaseBy)" @bind="increaseBy">
+  </div>
+    <div class="form-group">
+    <label for="@nameof(initialValue)">Initial Value</label>
+    <input type="number" class="form-control" id="@nameof(initialValue)" @bind="initialValue">
+  </div>
+
+<button @onclick="OpenCounterWithParameters">Open Counter</button>
+<button @onclick="Close">Close</button>
+
+<hr />
+
+
+@code {
+	private int increaseBy = 10;
+	private int initialValue = 100;
+	private void OpenCounterWithParameter()
+	{
+		Sidepanel.Open<Counter>("Counter", "example", (nameof(increaseBy),increaseBy));
+	}
+
+	private void OpenCounterWithParameters()
+	{
+		var parameters = new Dictionary<string, object> { 
+			{ (nameof(increaseBy)), increaseBy },
+			{ (nameof(initialValue)), initialValue}
+		};
+		Sidepanel.Open<Counter>("Counter","Example",parameters);
+	}
+
+	private void Close()
+	{
+		Sidepanel.Close();
+	}
+}
+

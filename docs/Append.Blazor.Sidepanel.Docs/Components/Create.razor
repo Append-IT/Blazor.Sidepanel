@@ -1,0 +1,54 @@
+﻿@using Microsoft.Extensions.Logging
+@inject ILogger<Create> Logger
+@inject ISidepanelService Sidepanel
+
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class="form-group">
+		<label>Identifier</label>
+		<InputText class="form-control" @bind-Value="starship.Identifier" />
+	</div>
+	<div class="form-group">
+		<label>Description </label>
+		<InputTextArea class="form-control" rows="3" @bind-Value="starship.Description" />
+	</div>
+
+	<div class="form-group">
+		<label>Primary Classification</label>
+		<InputSelect @bind-Value="starship.Classification" class="form-control">
+			<option value="">Select classification ...</option>
+			<option value="Exploration">Exploration</option>
+			<option value="Diplomacy">Diplomacy</option>
+			<option value="Defense">Defense</option>
+		</InputSelect>
+	</div>
+	<div class="form-group">
+		<label>Maximum Accommodation</label>
+		<InputNumber class="form-control" @bind-Value="starship.MaximumAccommodation" />
+	</div>
+	<div class="form-check">
+		<InputCheckbox class="form-check-input" id="@nameof(starship.IsValidatedDesign)" @bind-Value="starship.IsValidatedDesign" />
+		<label class="form-check-label" for="@nameof(starship.IsValidatedDesign)">Engineering Approval</label>
+	</div>
+
+	<div class="form-group">
+		<label>Production Date</label>
+		<InputDate class="form-control" @bind-Value="starship.ProductionDate" />
+	</div>
+
+	<button class="btn btn-outline-primary btn-block" type="submit">Create</button>
+	<button class="btn btn-outline-secondary btn-block" type="reset">Reset</button>
+	<button class="btn btn-outline-danger btn-block" type="button" @onclick="Sidepanel.SoftClose">Cancel</button>
+</EditForm>
+
+@code {
+	private Starship starship = new() { ProductionDate = DateTime.UtcNow };
+
+	private void HandleValidSubmit()
+	{
+		Logger.LogInformation("HandleValidSubmit called");
+		// Process the valid form
+	}
+}

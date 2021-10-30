@@ -1,0 +1,31 @@
+﻿@page "/sizing"
+@inject ISidepanelService Sidepanel
+
+<h1>Sidepanel Sizing</h1>
+<p>Shows how to customize the width of sidepanel</p>
+<h2>Open Counter</h2>
+<button @onclick="OpenCounter">Open Counter</button>
+<button @onclick="Close">Close</button>
+<style>
+#sidepanel.is-open {
+    width: 80%;
+}
+
+@@media (min-width: 768px) {
+    #sidepanel.is-open {
+        width: 50%;
+    }
+}
+</style>
+@code {
+	private void OpenCounter()
+	{
+		Sidepanel.Open<Counter>("Counter", "example");
+	}
+
+	private void Close()
+	{
+		Sidepanel.Close();
+	}
+}
+

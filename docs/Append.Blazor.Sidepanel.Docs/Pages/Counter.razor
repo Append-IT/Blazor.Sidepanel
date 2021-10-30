@@ -1,0 +1,23 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount;
+    [Parameter] public int IncreaseBy { get; set; } = 1;
+    [Parameter] public int InitialValue { get; set; } = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        currentCount = InitialValue;
+    }
+    private void IncrementCount()
+    {
+        currentCount = currentCount + IncreaseBy;
+    }
+}

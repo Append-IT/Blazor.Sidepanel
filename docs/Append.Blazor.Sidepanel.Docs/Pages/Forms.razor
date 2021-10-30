@@ -1,0 +1,45 @@
+﻿@page "/forms"
+@inject ISidepanelService Sidepanel
+@using Append.Blazor.Sidepanel.Docs.Components
+
+<h1>Sidepanel Forms</h1>
+
+<h2>Open Create Form</h2>
+<button @onclick="OpenCreateForm">Open Create Form</button>
+<button @onclick="Close">Close</button>
+
+<hr />
+
+<h2>Open Fetch Data</h2>
+<button @onclick="OpenEditForm">Open Edit Form</button>
+<button @onclick="Close">Close</button>
+
+<hr />
+
+
+@code {
+	private void OpenCreateForm()
+	{
+		Sidepanel.Open<Create>("Create", "Starship");
+	}
+
+	private void OpenEditForm()
+	{
+		Starship starship = new Starship()
+		{
+			Classification = "Defense",
+			Description = "Filled in description",
+			Identifier = "X-Wing",
+			MaximumAccommodation = 15,
+			ProductionDate = DateTime.Now,
+			IsValidatedDesign = true
+		};
+		Sidepanel.Open<Edit>("Edit","Starship",("Starship",starship));
+	}
+
+	private void Close()
+	{
+		Sidepanel.Close();
+	}
+}
+
