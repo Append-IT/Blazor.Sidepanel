@@ -10,14 +10,23 @@
     private int currentCount;
     [Parameter] public int IncreaseBy { get; set; } = 1;
     [Parameter] public int InitialValue { get; set; } = 0;
+    [Parameter] public EventCallback OnCounterClicked { get; set; }
+    [Parameter] public EventCallback<string> OnCounterClickedWithParameter { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
         currentCount = InitialValue;
     }
-    private void IncrementCount()
+    private async Task IncrementCount()
     {
         currentCount = currentCount + IncreaseBy;
+        if(OnCounterClicked.HasDelegate){
+            await OnCounterClicked.InvokeAsync();
+        }
+
+        if(OnCounterClickedWithParameter.HasDelegate){
+            await OnCounterClickedWithParameter.InvokeAsync("Hey, from counter!");
+        }
     }
 }

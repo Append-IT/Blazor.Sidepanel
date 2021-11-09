@@ -1,0 +1,67 @@
+﻿@page "/callbacks"
+@inject ISidepanelService Sidepanel
+
+<h1>Sidepanel Callbacks</h1>
+
+<h2>Open Counter with a callback without parameters</h2>
+
+<button @onclick="OpenCounterWithCallback">Open Counter</button>
+<button @onclick="Close">Close</button>
+
+<Codeblock Code="@codeblock1"/>
+
+<hr />
+
+<h2>Open Counter with a callback with a parameter</h2>
+
+<button @onclick="OpenCounterWithCallback2">Open Counter</button>
+<button @onclick="Close">Close</button>
+
+<Codeblock Code="@codeblock2"/>
+
+
+@code {
+	private string codeblock1 => "var callback = EventCallback.Factory.Create(this, OnCallback)\n" +
+								 "var parameters = new Dictionary<string, object> {\n" +
+									"{ (nameof(increaseBy)), increaseBy }\n" +
+									"{ \"OnCounterClicked\", callback }}\n" +
+									"Sidepanel.Open<Counter>(\"Counter\",\"Example\",parameters);";
+
+	private string codeblock2 => "var callback = EventCallback.Factory.Create<string>(this, OnCallbackWithParameter)\n" +
+								 "Sidepanel.Open<Counter>(\"Counter\",\"Example\",(\"OnCounterClickedWithParameter\", callback));";
+
+	private int increaseBy = 10;
+
+	private void OpenCounterWithCallback()
+	{
+		var callback = EventCallback.Factory.Create(this, OnCallback);
+
+		var parameters = new Dictionary<string, object> { 
+			{ (nameof(increaseBy)), increaseBy },
+			{ "OnCounterClicked", callback }
+		};
+		Sidepanel.Open<Counter>("Counter","Example",parameters);
+	}
+
+		private void OpenCounterWithCallback2()
+	{
+		var callback = EventCallback.Factory.Create<string>(this, OnCallbackWithParameter);
+		Sidepanel.Open<Counter>("Counter","Example",("OnCounterClickedWithParameter", callback));
+	}
+
+	private void OnCallback()
+	{
+		Console.WriteLine("Callback Triggered");
+	}
+
+	private void OnCallbackWithParameter(string parameter)
+	{
+		Console.WriteLine("Callback Triggered with parameter:" + parameter);
+	}
+
+	private void Close()
+	{
+		Sidepanel.Close();
+	}
+}
+
