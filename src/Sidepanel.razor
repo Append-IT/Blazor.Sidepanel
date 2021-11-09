@@ -12,6 +12,8 @@
 				</button>
 			</header>
 		</div>
-		@BuildInnerComponent()
+		@if(Service.Component is not null){
+			<DynamicComponent Type="@Service.Component" Parameters="@Service.Parameters"/>
+		}
 	</div>
 </aside>

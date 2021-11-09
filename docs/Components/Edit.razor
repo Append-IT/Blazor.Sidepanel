@@ -3,64 +3,68 @@
 @inject ISidepanelService Sidepanel
 
 <EditForm Model="@Starship" OnValidSubmit="@HandleValidSubmit">
-	<DataAnnotationsValidator />
-	@*<ValidationSummary />*@
+    <DataAnnotationsValidator />
+    @*<ValidationSummary />*@
 
-	<div class="form-group">
-		<label>Identifier</label>
-		<InputText class="form-control" @bind-Value="Starship.Identifier" />
-		<ValidationMessage For="@(() => Starship.Identifier)" />
-	</div>
-	<div class="form-group">
-		<label>Description </label>
-		<InputTextArea class="form-control" rows="3" @bind-Value="Starship.Description" />
-		<ValidationMessage For="@(() => Starship.Description)" />
-	</div>
+    <div class="mb-3">
+        <label class="form-label">Identifier</label>
+        <InputText class="form-control" @bind-Value="Starship.Identifier" />
+        <ValidationMessage For="@(() => Starship.Identifier)" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description </label>
+        <InputTextArea class="form-control" rows="3" @bind-Value="Starship.Description" />
+        <ValidationMessage For="@(() => Starship.Description)" />
+    </div>
 
-	<div class="form-group">
-		<label>Primary Classification</label>
-		<InputSelect @bind-Value="Starship.Classification" class="form-control">
-			<option value="">Select classification ...</option>
-			<option value="Exploration">Exploration</option>
-			<option value="Diplomacy">Diplomacy</option>
-			<option value="Defense">Defense</option>
-		</InputSelect>
-		<ValidationMessage For="@(() => Starship.Classification)" />
-	</div>
-	<div class="form-group">
-		<label>Maximum Accommodation</label>
-		<InputNumber class="form-control" @bind-Value="Starship.MaximumAccommodation" />
-		<ValidationMessage For="@(() => Starship.MaximumAccommodation)" />
-	</div>
-	<div class="form-check">
-		<InputCheckbox class="form-check-input" id="@nameof(Starship.IsValidatedDesign)" @bind-Value="Starship.IsValidatedDesign" />
-		<label class="form-check-label" for="@nameof(Starship.IsValidatedDesign)">Engineering Approval</label>
-		<ValidationMessage For="@(() => Starship.IsValidatedDesign)" />
-	</div>
+    <div class="mb-3">
+        <label class="form-label">Primary Classification</label>
+        <InputSelect @bind-Value="Starship.Classification" class="form-control">
+            <option value="">Select classification ...</option>
+            <option value="Exploration">Exploration</option>
+            <option value="Diplomacy">Diplomacy</option>
+            <option value="Defense">Defense</option>
+        </InputSelect>
+        <ValidationMessage For="@(() => Starship.Classification)" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Maximum Accommodation</label>
+        <InputNumber class="form-control" @bind-Value="Starship.MaximumAccommodation" />
+        <ValidationMessage For="@(() => Starship.MaximumAccommodation)" />
+    </div>
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="@nameof(Starship.IsValidatedDesign)" @bind-Value="Starship.IsValidatedDesign" />
+        <label class="form-check-label" for="@nameof(Starship.IsValidatedDesign)">Engineering Approval</label>
+        <ValidationMessage For="@(() => Starship.IsValidatedDesign)" />
+    </div>
 
-	<div class="form-group">
-		<label>Production Date</label>
-		<InputDate class="form-control" @bind-Value="Starship.ProductionDate" />
-		<ValidationMessage For="@(() => Starship.ProductionDate)" />
-	</div>
+    <div class="mb-3">
+        <label class="form-label">Production Date</label>
+        <InputDate class="form-control" @bind-Value="Starship.ProductionDate" />
+        <ValidationMessage For="@(() => Starship.ProductionDate)" />
+    </div>
 
-	<button class="btn btn-outline-primary btn-block" type="submit">Edit</button>
-	<button class="btn btn-outline-danger btn-block" type="button" @onclick="Sidepanel.Close">Cancel</button>
+    <div class="d-grid gap-2">
+        <button class="btn btn-outline-primary" type="submit">Edit</button>
+        <button class="btn btn-outline-danger" type="button" @onclick="Sidepanel.Close">Cancel</button>
+    </div>
+
+
 </EditForm>
 
 @code {
-	[Parameter] public Starship Starship { get; set; }
-	// You can also use a Id:int parameter, where you can then let the Editform fetch data from a back-end service
+    [Parameter] public Starship Starship { get; set; }
+    // You can also use a Id:int parameter, where you can then let the Editform fetch data from a back-end service
 
-	protected override void OnParametersSet()
-	{
-		base.OnParametersSet();
-	}
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
 
-	private void HandleValidSubmit()
-	{
-		Logger.LogInformation("HandleValidSubmit called");
-		// Process the valid form
-		Sidepanel.Close();
-	}
+    private void HandleValidSubmit()
+    {
+        Logger.LogInformation("HandleValidSubmit called");
+        // Process the valid form
+        Sidepanel.Close();
+    }
 }
