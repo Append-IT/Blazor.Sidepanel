@@ -13,7 +13,9 @@
 			</header>
 		</div>
 		@if(Service.Component is not null){
-			<DynamicComponent Type="@Service.Component" Parameters="@Service.Parameters"/>
+			<div class="inner-component">
+				<DynamicComponent Type="@Service.Component" Parameters="@Service.Parameters"/>
+			</div>
 		}
 	</div>
 </aside>
