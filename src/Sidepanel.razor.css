@@ -1,4 +1,4 @@
-﻿aside {
+aside {
     position: fixed;
     right: 0;
     top: 0;
@@ -28,17 +28,20 @@ small {
 
 .aside-inner {
     padding: 2rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
 }
-/*    .aside-inner::-webkit-scrollbar-button {
-        display:none;
+    .aside-inner::-webkit-scrollbar {
+        background-color: transparent;
+        width: 1rem;
     }
-    .aside-inner::-webkit-scrollbar-thumb {
+
+    .aside-inner:hover::-webkit-scrollbar-thumb {
         background-color: #babac0;
-        border-radius: 16px;
+        border-radius: 1rem;
         border: 4px solid #fff;
-    }*/
+    }
+
 
 button {
     color: rgba(156,163,175);
