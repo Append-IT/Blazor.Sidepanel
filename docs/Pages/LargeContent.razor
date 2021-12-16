@@ -1,0 +1,20 @@
+﻿@page "/large-content"
+@using Append.Blazor.Sidepanel.Docs.Components
+@inject ISidepanelService Sidepanel
+<PageTitle>Sidepanel - Large Content</PageTitle>
+
+<h1>Sidepanel Large Content</h1>
+
+<p>Showing and testing the scrollbar</p>
+
+<button @onclick="OpenLargeContent">Open Large Content</button>
+
+<LoremIpsum/>
+
+@code {
+    private void OpenLargeContent()
+    {
+        Sidepanel.Open<LoremIpsum>("Large Content", "example");
+    }
+}
+
