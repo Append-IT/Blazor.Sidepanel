@@ -34,12 +34,12 @@ small {
 }
     .aside-inner::-webkit-scrollbar {
         background-color: transparent;
-        display:none;
+        visibility:hidden;
         width: 1rem;
     }
 
     .aside-inner:hover::-webkit-scrollbar {
-        display: initial;
+        visibility: initial;
     }
 
     .aside-inner:hover::-webkit-scrollbar-thumb {
