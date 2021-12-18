@@ -36,6 +36,7 @@ small {
 .inner-component {
     overflow-y: auto;
     height: 100%;
+    scrollbar-width: thin;
 }
 
     .inner-component::-webkit-scrollbar {

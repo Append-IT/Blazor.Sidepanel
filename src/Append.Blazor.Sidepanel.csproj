@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Version>6.0.0</Version>
+		<Version>6.1.0</Version>
 		<Title>Blazor Sidepanel</Title>
 		<Authors>Benjamin Vertonghen</Authors>
 		<Company>Append</Company>
@@ -13,6 +13,7 @@
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageTags>Blazor;Razor;Components;Sidepanel;Dialog;ASP.NET;CSharp;Web</PackageTags>
 		<RepositoryType>GIT</RepositoryType>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 	<PropertyGroup>
