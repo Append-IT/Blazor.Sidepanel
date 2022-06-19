@@ -20,10 +20,28 @@
 
 <hr />
 
+<h2>Sidepanel Component</h2>
+
+<SidepanelComponent Title="SidepanelComponent Title" @ref="sidepanel">
+    <div>This is a Test</div>
+</SidepanelComponent>
+
+<button @onclick="OpenComponent">Open Component</button>
+<button @onclick="CloseComponent">Close</button>
+<Codeblock Code="@codeblock3"/>
+
+<Codeblock Code="@codeblock4"/>
+
+<hr/>
 
 @code {
 	private string codeblock1 => "Sidepanel.Open<Counter>(\"Counter\", \"example\");\nSidepanel.Close();";
 	private string codeblock2 => "Sidepanel.Open<FetchData>(\"FetchData\");\nSidepanel.Close();";
+    private string codeblock3 => "<SidepanelComponent Title=\"SidepanelComponent Title\" @ref=\"sidepanel\">\n\t<div>This is a Test</div>\n</SidepanelComponent>\n";
+    private string codeblock4 => "private void OpenComponent()\n{\n    sidepanel.Open();\n}";
+
+    private SidepanelComponent sidepanel;
+
 	private void OpenCounter()
 	{
 		Sidepanel.Open<Counter>("Counter", "example");
@@ -38,5 +56,15 @@
 	{
 		Sidepanel.Close();
 	}
+
+    private void OpenComponent()
+    {
+        sidepanel.Open();
+    }
+
+    private void CloseComponent()
+    {
+        sidepanel.Close();
+    }
 }
 
