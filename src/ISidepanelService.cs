@@ -8,8 +8,12 @@ public interface ISidepanelService
     string Title { get; }
     string Subtitle { get; }
     Type Component { get; }
-    Dictionary<string, object> Parameters { get; }
-    void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null);
+
+    RenderFragment ContentToRender { get; set; }
+
+	Dictionary<string, object> Parameters { get; }
+	void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null);
+	void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null);
     void Open<TComponent>(string title, (string Key, object Value) parameter) where TComponent : IComponent;
     void Open<TComponent>(string title, string subtitle = "") where TComponent : IComponent;
     void Open<TComponent>(string title, string subtitle, (string Key, object Value) parameter) where TComponent : IComponent;
