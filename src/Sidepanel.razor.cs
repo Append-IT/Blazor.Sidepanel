@@ -10,6 +10,8 @@ public partial class Sidepanel : IDisposable
     [Inject] public ISidepanelService Service { get; set; } = default!;
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
 
+    [Parameter] public BackdropType Backdrop { get; set; }
+
     public string IsOpenCssClass => Service.IsOpen ? "is-open" : null;
     protected override void OnInitialized()
     {
@@ -17,6 +19,7 @@ public partial class Sidepanel : IDisposable
             throw new NullReferenceException($"{nameof(ISidepanelService)} has to be registered in the DI container.");
         Service.OnSidepanelChanged += OnSidepanelChanged;
         NavigationManager.LocationChanged += OnLocationChanged;
+        Service.Backdrop = Backdrop;
     }
     public void Dispose()
     {
@@ -47,5 +50,16 @@ public partial class Sidepanel : IDisposable
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
         Service.Close();
+    }
+
+    private void BackDropClicked()
+    {
+        if (Service.Backdrop.HasFlag(BackdropType.Dismiss))
+        {
+            Service.Close();
+        } else if (Service.Backdrop.HasFlag(BackdropType.LightDismiss))
+        {
+            Service.SoftClose();
+        }
     }
 }

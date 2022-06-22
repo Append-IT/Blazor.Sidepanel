@@ -24,9 +24,14 @@ public partial class SidepanelComponent : ComponentBase, IDisposable
     /// </summary>
     [Parameter] public string SubTitle { get; set; }
 
+    /// <summary>
+    /// Optional <see cref="BackdropType"/>
+    /// </summary>
+    [Parameter] public BackdropType? Backdrop { get; set; }
+
     public void Open()
     {
-        Sidepanel.Open(Title, ChildContent, SubTitle);
+        Sidepanel.Open(Title, ChildContent, SubTitle, backDrop:Backdrop);
     }
 
     public void Close()

@@ -24,6 +24,11 @@ public interface ISidepanelService
     string Subtitle { get; }
 
     /// <summary>
+    /// Optionally a backdrop, by default there is no backdrop and no light dismiss
+    /// </summary>
+    BackdropType Backdrop { get; internal set; }
+
+    /// <summary>
     /// Type of the component to be rendered, it cannot be null when using the service.
     /// </summary>
     Type Component { get; }
@@ -45,7 +50,7 @@ public interface ISidepanelService
     /// <param name="component"></param>
     /// <param name="subtitle"></param>
     /// <param name="parameters">Addtional parameters to pass through the child component</param>
-	void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null);
+	void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null);
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="RenderFragment"/>
@@ -54,7 +59,7 @@ public interface ISidepanelService
     /// <param name="contentToRender"></param>
     /// <param name="subtitle"></param>
     /// <param name="parameters">Addtional parameters to pass through the child component</param>
-	void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null);
+	void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null);
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a single parameter as Tuple.
@@ -62,7 +67,7 @@ public interface ISidepanelService
     /// <typeparam name="TComponent"></typeparam>
     /// <param name="title"></param>
     /// <param name="parameter"></param>
-    void Open<TComponent>(string title, (string Key, object Value) parameter) where TComponent : IComponent;
+    void Open<TComponent>(string title, (string Key, object Value) parameter, BackdropType? backDrop = null) where TComponent : IComponent;
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/>.
@@ -70,7 +75,7 @@ public interface ISidepanelService
     /// <typeparam name="TComponent"></typeparam>
     /// <param name="title"></param>
     /// <param name="subtitle"></param>
-    void Open<TComponent>(string title, string subtitle = "") where TComponent : IComponent;
+    void Open<TComponent>(string title, string subtitle = "", BackdropType? backDrop = null) where TComponent : IComponent;
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a single parameter as Tuple.
@@ -79,7 +84,7 @@ public interface ISidepanelService
     /// <param name="title"></param>
     /// <param name="subtitle"></param>
     /// <param name="parameter"></param>
-    void Open<TComponent>(string title, string subtitle, (string Key, object Value) parameter) where TComponent : IComponent;
+    void Open<TComponent>(string title, string subtitle, (string Key, object Value) parameter, BackdropType? backDrop = null) where TComponent : IComponent;
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a dictionary of parameters.
@@ -88,7 +93,7 @@ public interface ISidepanelService
     /// <param name="title"></param>
     /// <param name="subtitle"></param>
     /// <param name="parameters"></param>
-    void Open<TComponent>(string title, string subtitle, Dictionary<string, object> parameters) where TComponent : IComponent;
+    void Open<TComponent>(string title, string subtitle, Dictionary<string, object> parameters, BackdropType? backDrop = null) where TComponent : IComponent;
 
     /// <summary>
     /// Closes the <see cref="Sidepanel"/> softly, meaning the render is kept intact, for example when using a Form and still preserving the state of the inner render.
