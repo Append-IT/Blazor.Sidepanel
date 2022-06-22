@@ -16,10 +16,28 @@ internal class SidepanelService : ISidepanelService
     public Type Component { get; internal set; }
 
     /// <inheritdoc />
+    public RenderFragment ContentToRender { get; internal set; }
+
+    /// <inheritdoc />
     public Dictionary<string, object> Parameters { get; internal set; }
 
     /// <inheritdoc />
     public bool IsOpen { get; internal set; }
+
+    public void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null)
+    {
+        if (contentToRender is null)
+        {
+            throw new NullReferenceException($"{nameof(contentToRender)} cannot be null.");
+		}
+        Component = null;
+        IsOpen = true;
+        Title = title;
+        Subtitle = subtitle;
+        ContentToRender = contentToRender;
+        Parameters = parameters;
+        OnSidepanelChanged?.Invoke();
+	}
 
     /// <inheritdoc />
     public void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null)
@@ -68,6 +86,7 @@ internal class SidepanelService : ISidepanelService
         Title = string.Empty;
         Subtitle = null;
         Component = null;
+        ContentToRender = null;
         OnSidepanelChanged?.Invoke();
     }
     /// <inheritdoc />

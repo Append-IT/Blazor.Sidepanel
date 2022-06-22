@@ -17,5 +17,13 @@
 				<DynamicComponent Type="@Service.Component" Parameters="@Service.Parameters"/>
 			</div>
 		}
-	</div>
+		
+		@if (Service.ContentToRender is not null)
+		{
+		    <div class="inner-component">
+                @Service.ContentToRender
+            </div>
+		}
+
+    </div>
 </aside>

@@ -10,44 +10,62 @@
 <button @onclick="OpenCreateForm">Open Create Form</button>
 <button @onclick="Close">Close</button>
 
-<Codeblock Code="@codeblock1"/>
+<Codeblock Code="@codeblock1" />
 
 <hr />
 
-<h2>Open Fetch Data</h2>
+<h2>Open Edit Form</h2>
 <button @onclick="OpenEditForm">Open Edit Form</button>
 <button @onclick="Close">Close</button>
 
-<Codeblock Code="@codeblock2"/>
+<Codeblock Code="@codeblock2" />
 
 <hr />
 
+<h1>Sidepanel Forms with component</h1>
+
+<SidepanelComponent @ref="sidepanel" Title="Create" SubTitle="Starship">
+    <Create />
+</SidepanelComponent>
+
+<button @onclick="OpenEditFormWithComponent">Open Create Form with component</button>
+<button @onclick="Close">Close</button>
+
+
 
 @code {
-	private string codeblock1 => "Sidepanel.Open<Create>(\"Create\", \"Starship\");";
-	private string codeblock2 => "Sidepanel.Open<Edit>(\"Create\", \"Starship\", ,(\"Starship\",new Starship()));";
-	private void OpenCreateForm()
-	{
-		Sidepanel.Open<Create>("Create", "Starship");
-	}
+    private SidepanelComponent sidepanel;
 
-	private void OpenEditForm()
-	{
-		Starship starship = new Starship()
-		{
-			Classification = "Defense",
-			Description = "Filled in description",
-			Identifier = "X-Wing",
-			MaximumAccommodation = 15,
-			ProductionDate = DateTime.Now,
-			IsValidatedDesign = true
-		};
-		Sidepanel.Open<Edit>("Edit","Starship",("Starship",starship));
-	}
+    private string codeblock1 => "Sidepanel.Open<Create>(\"Create\", \"Starship\");";
+    private string codeblock2 => "Sidepanel.Open<Edit>(\"Create\", \"Starship\", ,(\"Starship\",new Starship()));";
 
-	private void Close()
-	{
-		Sidepanel.Close();
-	}
+    private void OpenCreateForm()
+    {
+        Sidepanel.Open<Create>("Create", "Starship");
+    }
+
+    private void OpenEditForm()
+    {
+        Starship starship = new Starship()
+        {
+            Classification = "Defense",
+            Description = "Filled in description",
+            Identifier = "X-Wing",
+            MaximumAccommodation = 15,
+            ProductionDate = DateTime.Now,
+            IsValidatedDesign = true
+        };
+        Sidepanel.Open<Edit>("Edit", "Starship", ("Starship", starship));
+    }
+
+    private void Close()
+    {
+        Sidepanel.Close();
+    }
+
+    private void OpenEditFormWithComponent()
+    {
+        sidepanel.Open();
+    }
 }
 
