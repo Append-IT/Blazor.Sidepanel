@@ -24,7 +24,9 @@ internal class SidepanelService : ISidepanelService
     /// <inheritdoc />
     public bool IsOpen { get; internal set; }
 
-    public void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null)
+    public BackdropType Backdrop { get;  set; }
+
+    public void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null)
     {
         if (contentToRender is null)
         {
@@ -36,11 +38,12 @@ internal class SidepanelService : ISidepanelService
         Subtitle = subtitle;
         ContentToRender = contentToRender;
         Parameters = parameters;
+        Backdrop = backDrop.HasValue ? backDrop.Value : Backdrop;
         OnSidepanelChanged?.Invoke();
 	}
 
     /// <inheritdoc />
-    public void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null)
+    public void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null)
     {
         if (component is null)
             throw new NullReferenceException($"{nameof(component)} cannot be null.");
@@ -53,31 +56,32 @@ internal class SidepanelService : ISidepanelService
         Subtitle = subtitle;
         Component = component;
         Parameters = parameters;
+        Backdrop = backDrop.HasValue ? backDrop.Value : Backdrop;
         OnSidepanelChanged?.Invoke();
     }
     /// <inheritdoc />
-    public void Open<TComponent>(string title, string subtitle = "") where TComponent : IComponent
+    public void Open<TComponent>(string title, string subtitle = "", BackdropType? backDrop = null) where TComponent : IComponent
     {
-        Open(title, typeof(TComponent), subtitle);
+        Open(title, typeof(TComponent), subtitle,null, backDrop);
     }
     /// <inheritdoc />
-    public void Open<TComponent>(string title, string subtitle, Dictionary<string, object> parameters) where TComponent : IComponent
+    public void Open<TComponent>(string title, string subtitle, Dictionary<string, object> parameters, BackdropType? backDrop = null) where TComponent : IComponent
     {
-        Open(title, typeof(TComponent), subtitle, parameters);
+        Open(title, typeof(TComponent), subtitle, parameters, backDrop);
     }
     /// <inheritdoc />
-    public void Open<TComponent>(string title, string subtitle, (string Key, object Value) parameter) where TComponent : IComponent
+    public void Open<TComponent>(string title, string subtitle, (string Key, object Value) parameter, BackdropType? backDrop = null) where TComponent : IComponent
     {
         var dict = new Dictionary<string, object>
             {
                 { parameter.Key, parameter.Value }
             };
-        Open(title, typeof(TComponent), subtitle, dict);
+        Open(title, typeof(TComponent), subtitle, dict , backDrop);
     }
     /// <inheritdoc />
-    public void Open<TComponent>(string title, (string Key, object Value) parameter) where TComponent : IComponent
+    public void Open<TComponent>(string title, (string Key, object Value) parameter, BackdropType? backDrop = null) where TComponent : IComponent
     {
-        Open<TComponent>(title, null, parameter);
+        Open<TComponent>(title, null, parameter, backDrop);
     }
     /// <inheritdoc />
     public void Close()
