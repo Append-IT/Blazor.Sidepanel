@@ -45,6 +45,27 @@ Sidepanel.Open<Counter>("Counter", "example");
 Sidepanel.Close();
 ```
 
+### With component
+```razor
+<SidepanelComponent Title="Your Title" SubTitle="Optional Subtitle" @ref="sidepanel">
+    <div>Some inner content</div>
+</SidepanelComponent>
+
+@code
+{
+    private SidepanelComponent sidepanel;
+    private void Open()
+    {
+        sidepanel.Open();
+    }
+
+    private void Close()
+    {
+        sidepanel.Close();
+    }
+}
+```
+
 #### Advanced with 1 parameter
 > The parameter has to be set in the Counter component
 
