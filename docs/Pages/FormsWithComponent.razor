@@ -1,0 +1,71 @@
+﻿@page "/forms-with-component"
+@using Append.Blazor.Sidepanel.Docs.Components
+<PageTitle>Sidepanel - Forms with component</PageTitle>
+
+<h1>Sidepanel Forms using the component</h1>
+
+<h2>Open Create Form</h2>
+<SidepanelComponent @ref="createSidepanel" Title="Create" SubTitle="Starship">
+    <Create />
+</SidepanelComponent>
+
+<button @onclick="OpenCreateForm">Open Create Form</button>
+<button @onclick="Close">Close</button>
+
+<Codeblock Code="@codeblock1" />
+
+<hr />
+
+<h2>Open Edit Form</h2>
+<SidepanelComponent @ref="editSidepanel" Title="Edit" SubTitle="Starship">
+    <Edit Starship="starship" />
+</SidepanelComponent>
+
+<button @onclick="OpenEditForm">Open Edit Form</button>
+<button @onclick="SoftClose">Soft Close</button>
+
+<Codeblock Code="@codeblock2" />
+
+
+@code {
+    private SidepanelComponent editSidepanel;
+    private SidepanelComponent createSidepanel;
+    private Starship starship;
+    private string codeblock1 => "<SidepanelComponent @ref=\"createSidepanel\" Title=\"Create\" SubTitle=\"Starship\">\n    <Create />\n</SidepanelComponent>";
+    private string codeblock2 => "<SidepanelComponent @ref=\"editSidepanel\" Title=\"Edit\" SubTitle=\"Starship\">\n    <Edit Starship=\"starship\" />\n</SidepanelComponent>";
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        starship = new Starship()
+        {
+            Classification = "Defense",
+            Description = "Filled in description",
+            Identifier = "X-Wing",
+            MaximumAccommodation = 15,
+            ProductionDate = DateTime.Now,
+            IsValidatedDesign = true
+        };
+    }
+
+    private void OpenCreateForm()
+    {
+        createSidepanel.Open();
+    }
+
+    private void OpenEditForm()
+    {
+        editSidepanel.Open();
+    }
+
+    private void Close()
+    {
+        createSidepanel.Close();
+    }
+
+    private void SoftClose()
+    {
+        editSidepanel.SoftClose();
+    }
+}
+

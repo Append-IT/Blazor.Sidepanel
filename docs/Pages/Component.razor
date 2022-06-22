@@ -1,0 +1,35 @@
+﻿@page "/component"
+@inject ISidepanelService Sidepanel
+<PageTitle>Sidepanel - Component</PageTitle>
+
+<h1>Sidepanel Component</h1>
+<p>The component renders the inner content into the sidepanel.</p>
+
+<SidepanelComponent Title="Your Title" SubTitle="Optional Subtitle" @ref="sidepanel">
+    <div>Some inner content</div>
+</SidepanelComponent>
+
+<button @onclick="Open">Open Component</button>
+<button @onclick="Close">Close</button>
+
+<Codeblock Code="@codeblock1" />
+
+<Codeblock Code="@codeblock2" />
+
+@code {
+    private string codeblock1 => "<SidepanelComponent Title=\"SidepanelComponent Title\" @ref=\"sidepanel\">\n   <div>Some inner content</div>\n</SidepanelComponent>\n";
+    private string codeblock2 => "private SidepanelComponent sidepanel;\nprivate void OpenComponent()\n{\n    sidepanel.Open();\n}";
+
+    private SidepanelComponent sidepanel;
+
+    private void Open()
+    {
+        sidepanel.Open();
+    }
+
+    private void Close()
+    {
+        sidepanel.Close();
+    }
+}
+
