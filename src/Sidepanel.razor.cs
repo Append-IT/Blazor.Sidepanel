@@ -12,7 +12,17 @@ public partial class Sidepanel : IDisposable
 
     [Parameter] public BackdropType Backdrop { get; set; }
 
-    public string IsOpenCssClass => Service.IsOpen ? "is-open" : null;
+    public string IsOpenCssClass()
+    {
+        if (Service.IsOpen && Service.IsFullscreen)
+            return "is-open-fullscreen";
+
+        if (Service.IsOpen)
+            return "is-open";
+
+        return null;
+    }
+
     protected override void OnInitialized()
     {
         if (Service is null)

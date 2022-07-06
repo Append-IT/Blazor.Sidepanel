@@ -24,6 +24,10 @@ internal class SidepanelService : ISidepanelService
     /// <inheritdoc />
     public bool IsOpen { get; internal set; }
 
+    /// <inheritdoc />
+    public bool IsFullscreen { get; internal set; }
+
+    /// <inheritdoc />
     public BackdropType Backdrop { get;  set; }
 
     public void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null)
@@ -91,6 +95,7 @@ internal class SidepanelService : ISidepanelService
         Subtitle = null;
         Component = null;
         ContentToRender = null;
+        IsFullscreen = false;
         OnSidepanelChanged?.Invoke();
     }
     /// <inheritdoc />
@@ -98,5 +103,15 @@ internal class SidepanelService : ISidepanelService
     {
         IsOpen = false;
         OnSidepanelChanged?.Invoke();
+    }
+
+    public void Fullscreen()
+    {
+        IsFullscreen = true;
+    }
+
+    public void ExitFullscreen()
+    {
+        IsFullscreen = false;
     }
 }

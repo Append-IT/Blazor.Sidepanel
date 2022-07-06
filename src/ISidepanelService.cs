@@ -9,9 +9,14 @@ public interface ISidepanelService
     event Func<ValueTask> OnSidepanelChanged;
 
     /// <summary>
-    /// Inidicator if the <see cref="Sidepanel"/> is open or not.
+    /// Indicator if the <see cref="Sidepanel"/> is open or not.
     /// </summary>
     bool IsOpen { get; }
+
+    /// <summary>
+    /// Indicator if the <see cref="Sidepanel"/> is fullscreen or not.
+    /// </summary>
+    bool IsFullscreen { get; }
 
     /// <summary>
     /// The title of the <see cref="Sidepanel"/>.
@@ -104,4 +109,14 @@ public interface ISidepanelService
     /// Closes the <see cref="Sidepanel"/> and cleans-up the inner render.
     /// </summary>
     void Close();
+
+    /// <summary>
+    /// Changes the width of the sidepanel to fullscreen
+    /// </summary>
+    void Fullscreen();
+
+    /// <summary>
+    /// Changes the width of the sidepanel to the original size.
+    /// </summary>
+    void ExitFullscreen();
 }
