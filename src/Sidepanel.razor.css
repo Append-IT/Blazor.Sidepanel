@@ -8,7 +8,7 @@ aside {
     z-index: 110;
     transition: 0.3s;
     box-shadow: 0px 0px 70px 0px rgba(82, 63, 105, 0.30);
-    padding-bottom:2rem;
+    padding-bottom: 2rem;
 }
 
 header {
@@ -19,12 +19,12 @@ header {
 }
 
     header > div {
-        display:flex;
-        align-items:center;
+        display: flex;
+        align-items: center;
     }
 
-h1{
-    font-size:1.5rem;
+h1 {
+    font-size: 1.5rem;
 }
 
 small {
@@ -34,8 +34,8 @@ small {
 
 .aside-inner {
     padding: 1rem;
-    padding-right:1rem;
-    height:100%;
+    padding-right: 1rem;
+    height: 100%;
 }
 
 .inner-component {
@@ -67,6 +67,8 @@ button {
     outline: none;
     background-color: #fff;
     border: none;
+    height: 1.5rem;
+    padding: 0;
 }
 
     button:focus {
@@ -75,7 +77,6 @@ button {
 
     button:hover {
         color: rgba(107,114,128);
-
     }
 
 svg {
@@ -94,32 +95,34 @@ aside:focus {
 }
 
 .btn-fullscreen {
-    display:none;
+    display: none;
+    margin-right: 1.5rem;
 }
 
 @media (min-width: 991.98px) {
     aside.is-open {
         width: 425px;
     }
+
     aside.is-open-fullscreen {
         width: 100%;
     }
-    .btn-fullscreen {
-        display:initial;
-    }
 
+    .btn-fullscreen {
+        display: initial;
+    }
 }
 
 .backdrop {
-    position: fixed; 
-    width: 100%; 
-    height: 100%; 
+    position: fixed;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.3);
-    z-index: 105; 
+    z-index: 105;
 }
 
 .dismissable {

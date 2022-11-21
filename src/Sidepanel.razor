@@ -9,7 +9,7 @@
                     @if (Service.IsFullscreen)
                     {
                         <button type="button" @onclick="Service.ExitFullscreen" class="btn-fullscreen" title="Exit Fullscreen">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" style="height:1.3rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="100%">
                                 <path fill-rule="evenodd" d="M.172 15.828a.5.5 0 0 0 .707 0l4.096-4.096V14.5a.5.5 0 1 0 1 0v-3.975a.5.5 0 0 0-.5-.5H1.5a.5.5 0 0 0 0 1h2.768L.172 15.121a.5.5 0 0 0 0 .707zM15.828.172a.5.5 0 0 0-.707 0l-4.096 4.096V1.5a.5.5 0 1 0-1 0v3.975a.5.5 0 0 0 .5.5H14.5a.5.5 0 0 0 0-1h-2.768L15.828.879a.5.5 0 0 0 0-.707z" />
                             </svg>
                         </button>
@@ -17,14 +17,14 @@
                     else
                     {
                         <button type="button" @onclick="Service.Fullscreen" class="btn-fullscreen" title="Enter Fullscreen">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" style="height: 1.3rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="100%">
                                 <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
                             </svg>
                         </button>
                     }
 
                     <button type="button" @onclick="Service.Close" title="Close">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="2 2 12 12" width="100%">
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                         </svg>
                     </button>
@@ -32,25 +32,23 @@
             </header>
         </div>
         @if (Service.Component is not null)
-            {
+        {
             <div class="inner-component">
                 <DynamicComponent Type="@Service.Component" Parameters="@Service.Parameters" />
             </div>
-            }
+        }
 
         @if (Service.ContentToRender is not null)
-            {
+        {
             <div class="inner-component">
                 @Service.ContentToRender
             </div>
-            }
+        }
     </div>
 </aside>
 @if (Service.Backdrop.HasFlag(BackdropType.Overlay) && Service.IsOpen)
 {
     <div class="backdrop @(Service.Backdrop.HasFlag(BackdropType.LightDismiss) ? "dismissable" : null)" @onclick="BackDropClicked">
-
     </div>
 }
 
- 
