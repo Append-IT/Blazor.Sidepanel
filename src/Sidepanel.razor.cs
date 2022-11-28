@@ -5,7 +5,7 @@ namespace Append.Blazor.Sidepanel;
 
 public partial class Sidepanel : IDisposable
 {
-    private ElementReference _element;
+    protected ElementReference _element;
 
     [Inject] public ISidepanelService Service { get; set; } = default!;
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
@@ -57,12 +57,12 @@ public partial class Sidepanel : IDisposable
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    protected void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
         Service.Close();
     }
 
-    private void BackDropClicked()
+    protected void BackDropClicked()
     {
         if (Service.Backdrop.HasFlag(BackdropType.Dismiss))
         {
