@@ -1,21 +1,25 @@
 aside {
     position: fixed;
-    right: 0;
-    top: 0;
+    top: 100vh;
     background-color: #fff;
     height: 100%;
-    width: 0;
+    width: 100%;
     z-index: 110;
     transition: 0.3s;
     box-shadow: 0px 0px 70px 0px rgba(82, 63, 105, 0.30);
+    border-radius: 1rem;
     padding-bottom: 2rem;
 }
+    aside.is-open {
+        top:2vh
+    }
 
 header {
     display: flex;
     justify-content: space-between;
     color: rgba(17,24,39);
     margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(156,163,175,0.5);
 }
 
     header > div {
@@ -82,12 +86,8 @@ button {
 svg {
     display: block;
     vertical-align: middle;
-    width: 1.2rem;
-    height: 1.2rem;
-}
-
-aside.is-open {
-    width: 100%;
+    width: 1.5rem;
+    height: 1.50rem;
 }
 
 aside:focus {
@@ -96,11 +96,19 @@ aside:focus {
 
 .btn-fullscreen {
     display: none;
-    margin-right: 1.5rem;
+    margin-right: 1rem;
 }
 
 @media (min-width: 991.98px) {
+    aside {
+        width: 0;
+        right: 0;
+        top: 0;
+        box-shadow: 0px 0px 70px 0px rgba(82, 63, 105, 0.30);
+        border-radius: unset;
+    }
     aside.is-open {
+        top:0;
         width: 425px;
     }
 
