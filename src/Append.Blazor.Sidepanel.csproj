@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Version>6.3.3</Version>
 		<Title>Blazor Sidepanel</Title>
@@ -29,7 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.5" />
 	</ItemGroup>
 
 </Project>
