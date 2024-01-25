@@ -4,7 +4,6 @@
     private ElementReference _element;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Console.WriteLine("LOL");
         await Task.Delay(300); // Not a race condition but transition of the panel opening.
         await _element.FocusAsync();
     }
