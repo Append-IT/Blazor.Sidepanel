@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Reflection.Emit;
+using Microsoft.AspNetCore.Components;
 namespace Append.Blazor.Sidepanel;
 
 internal class SidepanelService : ISidepanelService
@@ -29,6 +30,31 @@ internal class SidepanelService : ISidepanelService
 
     /// <inheritdoc />
     public BackdropType Backdrop { get;  set; }
+
+
+    public void Open<TComponent>(string title,Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) where TComponent : IComponent
+    {
+        var renderFragment = new ComponentParameterCollectionBuilder<TComponent>(parameterBuilder).Build().ToRenderFragment<TComponent>();
+
+        Component = null;
+        IsOpen = true;
+        Title = title;
+        ContentToRender = renderFragment;
+        OnSidepanelChanged?.Invoke();
+    }
+
+    public void Open<TComponent>(string title,string subtitle, Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) where TComponent : IComponent
+    {
+        var renderFragment = new ComponentParameterCollectionBuilder<TComponent>(parameterBuilder).Build().ToRenderFragment<TComponent>();
+
+        Component = null;
+        IsOpen = true;
+        Title = title;
+        Subtitle = subtitle;
+        ContentToRender = renderFragment;
+        OnSidepanelChanged?.Invoke();
+    }
+
 
     public void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null)
     {

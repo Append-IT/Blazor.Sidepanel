@@ -49,13 +49,30 @@ public interface ISidepanelService
 	Dictionary<string, object> Parameters { get; }
 
     /// <summary>
+    /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a strongly typed function of parameters.
+    /// </summary>
+    /// <typeparam name="TComponent"></typeparam>
+    /// <param name="title"></param>
+    /// <param name="parameterBuilder"></param>
+    void Open<TComponent>(string title, Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) where TComponent : IComponent;
+
+    /// <summary>
+    /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a strongly typed function of parameters.
+    /// </summary>
+    /// <typeparam name="TComponent"></typeparam>
+    /// <param name="title"></param>
+    /// <param name="subtitle"></param>
+    /// <param name="parameterBuilder"></param>
+    void Open<TComponent>(string title,string subtitle, Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) where TComponent : IComponent;
+
+    /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a dictionary of parameters.
     /// </summary>
     /// <param name="title"></param>
     /// <param name="component"></param>
     /// <param name="subtitle"></param>
     /// <param name="parameters">Addtional parameters to pass through the child component</param>
-	void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null);
+    void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null);
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="RenderFragment"/>
