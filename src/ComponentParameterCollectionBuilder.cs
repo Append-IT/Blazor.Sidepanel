@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -52,7 +53,7 @@ public sealed class ComponentParameterCollectionBuilder<TComponent>
         var (name, cascadingValueName, isCascading) = GetParameterInfo(parameterSelector);
         return isCascading
             ? AddCascadingValueParameter(cascadingValueName, value)
-            : AddParameter(name, value);
+            : AddParameter<TValue>(name, value);
     }
 
     /// <summary>
@@ -65,16 +66,6 @@ public sealed class ComponentParameterCollectionBuilder<TComponent>
     /// <returns>This <see cref="ComponentParameterCollectionBuilder{TComponent}"/>.</returns>
     public ComponentParameterCollectionBuilder<TComponent> Add<TChildComponent>(Expression<Func<TComponent, RenderFragment?>> parameterSelector, Action<ComponentParameterCollectionBuilder<TChildComponent>>? childParameterBuilder = null)
         where TChildComponent : IComponent => Add(parameterSelector, GetRenderFragment(childParameterBuilder));
-
-    ///// <summary>
-    ///// Adds a component parameter for a <see cref="RenderFragment"/> parameter selected with <paramref name="parameterSelector"/>,
-    ///// where the <see cref="RenderFragment"/> value is the markup passed in through the <paramref name="markup"/> argument.
-    ///// </summary>
-    ///// <param name="parameterSelector">A lambda function that selects the parameter.</param>
-    ///// <param name="markup">The markup string to pass to the <see cref="RenderFragment"/>.</param>
-    ///// <returns>This <see cref="ComponentParameterCollectionBuilder{TComponent}"/>.</returns>
-    //public ComponentParameterCollectionBuilder<TComponent> Add(Expression<Func<TComponent, RenderFragment?>> parameterSelector, [StringSyntax("Html")] string markup)
-    //    => Add(parameterSelector, markup.ToMarkupRenderFragment());
 
     /// <summary>
     /// Adds a component parameter for a <see cref="RenderFragment{TValue}"/> template parameter selected with <paramref name="parameterSelector"/>,
@@ -236,6 +227,35 @@ public sealed class ComponentParameterCollectionBuilder<TComponent>
         => Add(parameterSelector, EventCallback.Factory.Create<TValue>(callback?.Target!, callback!));
 
     /// <summary>
+    /// Adds a ChildContent <see cref="RenderFragment"/> type parameter with the <paramref name="childContent"/> as value.
+    ///
+    /// Note, this is equivalent to <c>Add(p => p.ChildContent, childContent)</c>.
+    /// </summary>
+    /// <param name="childContent">The <see cref="RenderFragment"/> to pass the ChildContent parameter.</param>
+    /// <returns>This <see cref="ComponentParameterCollectionBuilder{TComponent}"/>.</returns>
+    public ComponentParameterCollectionBuilder<TComponent> AddChildContent(RenderFragment childContent)
+    {
+        if (!HasChildContentParameter())
+            throw new ArgumentException($"The component '{typeof(TComponent)}' does not have a {ChildContent} [Parameter] attribute.", nameof(childContent));
+
+        if (HasGenericChildContentParameter())
+            throw new ArgumentException($"Calling AddChildContent on component '{typeof(TComponent)}' with a generic {ChildContent} type (RenderFragment<T>) is not supported. Use the 'Add(p => p.ChildContent, p => {{content}})' method instead.", nameof(childContent));
+
+        return AddParameter(ChildContent, childContent);
+    }
+
+    /// <summary>
+    /// Adds a ChildContent <see cref="RenderFragment"/> type parameter, that is passed a <see cref="RenderFragment"/>,
+    /// which will render the <typeparamref name="TChildComponent"/> with the parameters passed to <paramref name="childParameterBuilder"/>.
+    /// </summary>
+    /// <typeparam name="TChildComponent">Type of child component to pass to the ChildContent parameter.</typeparam>
+    /// <param name="childParameterBuilder">A parameter builder for the <typeparamref name="TChildComponent"/>.</param>
+    /// <returns>This <see cref="ComponentParameterCollectionBuilder{TComponent}"/>.</returns>
+    public ComponentParameterCollectionBuilder<TComponent> AddChildContent<TChildComponent>(Action<ComponentParameterCollectionBuilder<TChildComponent>>? childParameterBuilder = null)
+        where TChildComponent : IComponent
+        => AddChildContent(GetRenderFragment(childParameterBuilder));
+
+    /// <summary>
     /// Adds an UNNAMED cascading value around the <typeparamref name="TComponent"/> when it is rendered. Used to
     /// pass cascading values to child components of <typeparamref name="TComponent"/>.
     /// </summary>
@@ -334,6 +354,14 @@ public sealed class ComponentParameterCollectionBuilder<TComponent>
 
         return (propertyInfo.Name, CascadingValueName: cascadingParamAttr?.Name, IsCascading: cascadingParamAttr is not null);
     }
+
+    private static bool HasChildContentParameter()
+        => TComponentType.GetProperty(ChildContent, BindingFlags.Public | BindingFlags.Instance) is PropertyInfo ccProp
+            && ccProp.GetCustomAttribute<ParameterAttribute>(inherit: false) is not null;
+
+    private static bool HasGenericChildContentParameter()
+        => TComponentType.GetProperty(ChildContent, BindingFlags.Public | BindingFlags.Instance) is PropertyInfo ccProp
+            && ccProp.PropertyType.IsGenericType;
 
     private ComponentParameterCollectionBuilder<TComponent> AddParameter<TValue>(string name, [AllowNull] TValue value)
     {

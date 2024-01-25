@@ -12,7 +12,7 @@ public partial class Sidepanel : IDisposable
 
     [Parameter] public BackdropType Backdrop { get; set; }
 
-    public string IsOpenCssClass()
+    public string? IsOpenCssClass()
     {
         if (Service.IsOpen && Service.IsFullscreen)
             return "is-open-fullscreen";
@@ -57,7 +57,7 @@ public partial class Sidepanel : IDisposable
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         Service.Close();
     }

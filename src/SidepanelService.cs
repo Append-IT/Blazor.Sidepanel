@@ -5,22 +5,22 @@ namespace Append.Blazor.Sidepanel;
 internal class SidepanelService : ISidepanelService
 {
     /// <inheritdoc />
-    public event Func<ValueTask> OnSidepanelChanged;
+    public event Func<ValueTask>? OnSidepanelChanged;
 
     /// <inheritdoc />
-    public string Title { get; internal set; }
+    public string Title { get; internal set; } = default!;
 
     /// <inheritdoc />
-    public string Subtitle { get; internal set; }
+    public string? Subtitle { get; internal set; }
 
     /// <inheritdoc />
-    public Type Component { get; internal set; }
+    public Type? Component { get; internal set; }
 
     /// <inheritdoc />
-    public RenderFragment ContentToRender { get; internal set; }
+    public RenderFragment? ContentToRender { get; internal set; }
 
     /// <inheritdoc />
-    public Dictionary<string, object> Parameters { get; internal set; }
+    public Dictionary<string, object>? Parameters { get; internal set; }
 
     /// <inheritdoc />
     public bool IsOpen { get; internal set; }
@@ -56,7 +56,7 @@ internal class SidepanelService : ISidepanelService
     }
 
 
-    public void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null)
+    public void Open(string title, RenderFragment contentToRender, string? subtitle = null, Dictionary<string, object>? parameters = null, BackdropType? backDrop = null)
     {
         if (contentToRender is null)
         {
@@ -73,7 +73,7 @@ internal class SidepanelService : ISidepanelService
 	}
 
     /// <inheritdoc />
-    public void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null)
+    public void Open(string title, Type component, string? subtitle = null, Dictionary<string, object>? parameters = null, BackdropType? backDrop = null)
     {
         if (component is null)
             throw new NullReferenceException($"{nameof(component)} cannot be null.");
@@ -90,7 +90,7 @@ internal class SidepanelService : ISidepanelService
         OnSidepanelChanged?.Invoke();
     }
     /// <inheritdoc />
-    public void Open<TComponent>(string title, string subtitle = "", BackdropType? backDrop = null) where TComponent : IComponent
+    public void Open<TComponent>(string title, string? subtitle = null, BackdropType? backDrop = null) where TComponent : IComponent
     {
         Open(title, typeof(TComponent), subtitle,null, backDrop);
     }
@@ -100,7 +100,7 @@ internal class SidepanelService : ISidepanelService
         Open(title, typeof(TComponent), subtitle, parameters, backDrop);
     }
     /// <inheritdoc />
-    public void Open<TComponent>(string title, string subtitle, (string Key, object Value) parameter, BackdropType? backDrop = null) where TComponent : IComponent
+    public void Open<TComponent>(string title, string? subtitle, (string Key, object Value) parameter, BackdropType? backDrop = null) where TComponent : IComponent
     {
         var dict = new Dictionary<string, object>
             {

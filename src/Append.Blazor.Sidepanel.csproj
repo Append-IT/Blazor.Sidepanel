@@ -14,6 +14,7 @@
 		<PackageTags>Blazor;Razor;Components;Sidepanel;Dialog;ASP.NET;CSharp;Web</PackageTags>
 		<RepositoryType>GIT</RepositoryType>
 		<IsPackable>true</IsPackable>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<PropertyGroup>

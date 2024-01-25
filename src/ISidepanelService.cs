@@ -26,7 +26,7 @@ public interface ISidepanelService
     /// <summary>
     /// An optional smaller subtitle rendered next to the title.
     /// </summary>
-    string Subtitle { get; }
+    string? Subtitle { get; }
 
     /// <summary>
     /// Optionally a backdrop, by default there is no backdrop and no light dismiss
@@ -36,17 +36,17 @@ public interface ISidepanelService
     /// <summary>
     /// Type of the component to be rendered, it cannot be null when using the service.
     /// </summary>
-    Type Component { get; }
+    Type? Component { get; }
 
     /// <summary>
     /// When using a <see cref="SidepanelComponent"/> the inner ChildContent to be rendered, it cannot be null when using the <see cref="SidepanelComponent"/>.
     /// </summary>
-    RenderFragment ContentToRender { get; }
+    RenderFragment? ContentToRender { get; }
 
     /// <summary>
     /// When using the <see cref="ISidepanelService"/> the optional parameters you want to pass to the Child Component.
     /// </summary>
-	Dictionary<string, object> Parameters { get; }
+	Dictionary<string, object>? Parameters { get; }
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a strongly typed function of parameters.
@@ -72,7 +72,7 @@ public interface ISidepanelService
     /// <param name="component"></param>
     /// <param name="subtitle"></param>
     /// <param name="parameters">Addtional parameters to pass through the child component</param>
-    void Open(string title, Type component, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null);
+    void Open(string title, Type component, string? subtitle = null, Dictionary<string, object>? parameters = null, BackdropType? backDrop = null);
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="RenderFragment"/>
@@ -81,7 +81,7 @@ public interface ISidepanelService
     /// <param name="contentToRender"></param>
     /// <param name="subtitle"></param>
     /// <param name="parameters">Addtional parameters to pass through the child component</param>
-	void Open(string title, RenderFragment contentToRender, string subtitle = null, Dictionary<string, object> parameters = null, BackdropType? backDrop = null);
+	void Open(string title, RenderFragment contentToRender, string? subtitle = null, Dictionary<string, object>? parameters = null, BackdropType? backDrop = null);
 
     /// <summary>
     /// Opens the <see cref="Sidepanel"/> using a <see cref="IComponent"/> with a single parameter as Tuple.
