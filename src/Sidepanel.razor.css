@@ -116,6 +116,7 @@ aside:focus {
 
     aside.is-open-fullscreen {
         width: 100%;
+        visibility:visible;
     }
 
     .btn-fullscreen {
