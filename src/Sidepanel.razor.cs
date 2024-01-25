@@ -5,8 +5,6 @@ namespace Append.Blazor.Sidepanel;
 
 public partial class Sidepanel : IDisposable
 {
-    private ElementReference _element;
-
     [Inject] public ISidepanelService Service { get; set; } = default!;
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
 
@@ -27,23 +25,15 @@ public partial class Sidepanel : IDisposable
     {
         if (Service is null)
             throw new NullReferenceException($"{nameof(ISidepanelService)} has to be registered in the DI container.");
-        Service.OnSidepanelChanged += OnSidepanelChanged;
+        Service.OnSidepanelChanged += StateHasChanged;
         NavigationManager.LocationChanged += OnLocationChanged;
         Service.Backdrop = Backdrop;
     }
+
     public void Dispose()
     {
-        Service.OnSidepanelChanged -= OnSidepanelChanged;
+        Service.OnSidepanelChanged -= StateHasChanged;
         NavigationManager.LocationChanged -= OnLocationChanged;
-    }
-
-    public async ValueTask OnSidepanelChanged()
-    {
-        StateHasChanged();
-        if (Service.IsOpen)
-        {
-            await _element.FocusAsync();
-        }
     }
 
     public void OnKeyDown(KeyboardEventArgs args)

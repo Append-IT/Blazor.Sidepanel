@@ -5,7 +5,7 @@ namespace Append.Blazor.Sidepanel;
 internal class SidepanelService : ISidepanelService
 {
     /// <inheritdoc />
-    public event Func<ValueTask>? OnSidepanelChanged;
+    public event Action OnSidepanelChanged = default!;
 
     /// <inheritdoc />
     public string Title { get; internal set; } = default!;
@@ -40,7 +40,7 @@ internal class SidepanelService : ISidepanelService
         IsOpen = true;
         Title = title;
         ContentToRender = renderFragment;
-        OnSidepanelChanged?.Invoke();
+        OnSidepanelChanged();
     }
 
     public void Open<TComponent>(string title,string subtitle, Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) where TComponent : IComponent
@@ -52,7 +52,7 @@ internal class SidepanelService : ISidepanelService
         Title = title;
         Subtitle = subtitle;
         ContentToRender = renderFragment;
-        OnSidepanelChanged?.Invoke();
+        OnSidepanelChanged();
     }
 
 
@@ -69,7 +69,7 @@ internal class SidepanelService : ISidepanelService
         ContentToRender = contentToRender;
         Parameters = parameters;
         Backdrop = backDrop.HasValue ? backDrop.Value : Backdrop;
-        OnSidepanelChanged?.Invoke();
+        OnSidepanelChanged();
 	}
 
     /// <inheritdoc />
@@ -87,7 +87,7 @@ internal class SidepanelService : ISidepanelService
         Component = component;
         Parameters = parameters;
         Backdrop = backDrop.HasValue ? backDrop.Value : Backdrop;
-        OnSidepanelChanged?.Invoke();
+        OnSidepanelChanged();
     }
     /// <inheritdoc />
     public void Open<TComponent>(string title, string? subtitle = null, BackdropType? backDrop = null) where TComponent : IComponent
@@ -122,13 +122,13 @@ internal class SidepanelService : ISidepanelService
         Component = null;
         ContentToRender = null;
         IsFullscreen = false;
-        OnSidepanelChanged?.Invoke();
+        OnSidepanelChanged();
     }
     /// <inheritdoc />
     public void SoftClose()
     {
         IsOpen = false;
-        OnSidepanelChanged?.Invoke();
+        OnSidepanelChanged();
     }
 
     public void Fullscreen()

@@ -6,7 +6,7 @@ public interface ISidepanelService
     /// <summary>
     /// Event fired when the visibility of the <see cref="Sidepanel"/> Changes.
     /// </summary>
-    event Func<ValueTask> OnSidepanelChanged;
+    event Action OnSidepanelChanged;
 
     /// <summary>
     /// Indicator if the <see cref="Sidepanel"/> is open or not.
